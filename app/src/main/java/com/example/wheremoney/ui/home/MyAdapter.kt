@@ -6,12 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wheremoney.R
+import com.example.wheremoney.models.Debt
 import kotlinx.android.synthetic.main.card_item.view.*
 
-class MyAdapter(val items: ArrayList<String>, val context: Context?) :
+class MyAdapter(val items: ArrayList<Debt>, val context: Context?) :
     RecyclerView.Adapter<ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvAnimalType?.text = items.get(position)
+        // todo: делать логику отображения
+        val current = items.get(position)
+        holder.tvHowMany?.text = String.format("%d (%s)",
+            current.quantity, current.currency)
+        holder.tvWhen?.text = current.date.toString()
+        holder.tvWho?.text = current.from
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,13 +30,13 @@ class MyAdapter(val items: ArrayList<String>, val context: Context?) :
         )
     }
 
-    // Gets the number of animals in the list
     override fun getItemCount(): Int {
         return items.size
     }
 }
 
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-    // Holds the TextView that will add each animal to
-    val tvAnimalType = view.tvWhen
+    val tvWho = view.tvWho
+    val tvWhen = view.tvWhen
+    val tvHowMany = view.tvHowMany
 }
