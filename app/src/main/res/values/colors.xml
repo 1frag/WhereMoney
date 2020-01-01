@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#087F23</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorLikeGreenBut4CAF50">#4CAF50</color>
+    <color name="usuallyCardColour">#DFDFDF</color>
+    <color name="dangerousCardColour">#FF516E</color>
+    <color name="pleasureCardColour">#4CAF50</color>
 </resources>
