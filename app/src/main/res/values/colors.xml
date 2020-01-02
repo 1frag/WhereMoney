@@ -7,4 +7,8 @@
     <color name="usuallyCardColour">#DFDFDF</color>
     <color name="dangerousCardColour">#FF516E</color>
     <color name="pleasureCardColour">#4CAF50</color>
+    <color name="white">#FFF</color>
+    <color name="calendarBackground">#FAFAFA</color>
+    <color name="calendarSelected">#087F23</color>
+    <color name="calendarTextColor">#000</color>
 </resources>

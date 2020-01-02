@@ -17,4 +17,8 @@
     <string name="budjet">Budjet</string>
     <string name="today">Сегодня</string>
     <string name="loading">Loading...</string>
+    <string name="title_activity_add_new_debt">AddNewDebtActivity</string>
+    <string name="howLongLending">Вернуть до возможно никогда</string>
+    <string name="save">Сохранить</string>
+    <string name="edit_date_desc">editDate</string>
 </resources>

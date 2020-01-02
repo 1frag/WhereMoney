@@ -27,4 +27,18 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="26dp"
+        app:backgroundTint="@color/colorLikeGreenBut4CAF50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/just_plus" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

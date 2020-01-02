@@ -4,22 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.home.AddNewDebtActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/actionBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.Launcher.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorLikeGreenBut4CAF50"
-            app:popupTheme="@style/AppTheme.Launcher.PopupOverlay" />
+            android:id="@+id/toolbar"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:elevation="4dp"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main2" />
+    <include layout="@layout/content_add_new_debt" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

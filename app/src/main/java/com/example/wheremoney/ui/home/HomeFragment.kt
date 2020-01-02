@@ -1,6 +1,7 @@
 package com.example.wheremoney.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.room.Room
 import com.example.wheremoney.R
 import com.example.wheremoney.models.AppDatabase
 import com.example.wheremoney.models.Debt
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.coroutines.*
 
@@ -30,7 +32,11 @@ class HomeFragment : Fragment() {
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
-        addAnimals(this.context!!) // todo: change to add cards
+        addAnimals(this.context!!)
+        root.fab.setOnClickListener(View.OnClickListener {
+            addNewDebt(view!!)
+        })
+
         root.rv_cards_list.layoutManager = LinearLayoutManager(this.context)
         root.rv_cards_list.adapter = MyAdapter(animals, this.context)
         return root
@@ -47,5 +53,11 @@ class HomeFragment : Fragment() {
             }
             animals.addAll(res.await())
         }
+    }
+
+    private fun addNewDebt(view: View) {
+        val intent = Intent(this.context!!, AddNewDebtActivity::class.java)
+//        intent.putExtra("keyIdentifier", value)
+        startActivity(intent)
     }
 }
