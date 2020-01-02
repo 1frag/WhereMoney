@@ -1,5 +1,6 @@
 package com.example.wheremoney.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -18,9 +19,68 @@ class MyAdapter(private val items: ArrayList<Debt>, private val context: Context
         // todo: делать логику отображения
         val current = items[position]
         chooseStyle(holder, current)
-        holder.tvHowMany.text = String.format("%.2f (%s)",
-            current.quantity, current.currency)
+        defineWhen(holder, current)
+        defineOnlyRub(holder, current)
+
+        holder.tvHowMany.text = String.format(
+            "%.2f %s",
+            current.quantity, current.currency.likeCurrency()
+        )
         holder.tvWho.text = current.partner
+    }
+
+    private fun defineOnlyRub(holder: ViewHolder, debt: Debt) {
+        if (debt.currency == "RUB") return
+        holder.tvHowManyRubOnly.text = String.format(
+            "%.2f %s",
+            convertCurrency(debt.quantity, debt.currency, "RUB"),
+            "RUB".likeCurrency()
+        )
+    }
+
+    private fun convertCurrency(howMany: Float, c1from: String, c2to: String): Float {
+        return 1.0f
+    }
+
+    private fun Boolean.toInt() = if (this) 1 else 0
+
+    private fun String.likeCurrency(): String {
+        return when (this) {
+            "RUB" -> "\u20BD"
+            "USD" -> "\$"
+            "EUR" -> "€"
+            else -> this
+        }
+    }
+
+    private fun defineWhen(holder: ViewHolder, debt: Debt) {
+        fun getDate(): Int {
+            return when {
+                DateInfo(debt).equal(DateInfo("NOW")) -> 0
+                DateInfo(debt).earlyThanNow() -> -1
+                else -> 1
+            }
+        }
+
+        fun getDirection(): Int {
+            return 2 * (debt.quantity > 0).toInt() - 1
+        }
+
+        holder.tvWhen.text = generateTextWhen(
+            getDate(), getDirection(),
+            DateInfo(debt).toString()
+        )
+    }
+
+    private fun generateTextWhen(date: Int, direction: Int, formatDate: String): String {
+        /**date :: 1 -> будет, 0 -> сегодня, -1 -> было
+         * direction :: 1 -> мне, -1 -> я им
+         * formatDate - красивая дата
+         * */
+        return "%s %s".format(
+            if (direction == 1) "Мне вернут" else "Отдать",
+            if (date == 0) "сегодня" else "до ".plus(formatDate)
+        )
     }
 
     private fun chooseStyle(holder: ViewHolder, debt: Debt) {
@@ -40,6 +100,7 @@ class MyAdapter(private val items: ArrayList<Debt>, private val context: Context
             return
         }
 
+        holder.tvHowManyRubOnly.setTextColor(getColor("#FF000000"))
         holder.tvHowMany.setTextColor(getColor("#FF000000"))
         holder.tvWhen.setTextColor(getColor("#FF000000"))
         holder.tvWho.setTextColor(getColor("#FF000000"))
@@ -64,9 +125,10 @@ class MyAdapter(private val items: ArrayList<Debt>, private val context: Context
     }
 }
 
-class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val tvWho = view.tvWho!!
     val tvWhen = view.tvWhen!!
-    val tvHowMany = view.tvHowMany!!
     val cardView = view.card_view!!
+    val tvHowMany = view.tvHowMany!!
+    val tvHowManyRubOnly = view.tvHowManyRubOnly!!
 }

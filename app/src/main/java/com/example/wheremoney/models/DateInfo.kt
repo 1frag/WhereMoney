@@ -41,4 +41,8 @@ class DateInfo(var day: Int = 0, var month: Int = 0, var year: Int = 0) {
     fun earlyThanNow(): Boolean {
         return this.earlyThan(DateInfo(mark = "NOW"))
     }
+
+    override fun toString(): String {
+        return "%d.%d.%d".format(day, month, year)
+    }
 }

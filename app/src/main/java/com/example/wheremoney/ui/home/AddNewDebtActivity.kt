@@ -24,6 +24,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.logging.Logger
+import kotlin.math.log
 
 
 class AddNewDebtActivity : AppCompatActivity() {
@@ -82,10 +84,10 @@ class AddNewDebtActivity : AppCompatActivity() {
         textInputEditText1.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (textInputEditText1.text.toString() == "") {
-                    textInputEditText1.error = "Необходимо указать, кто вам должен"
+                    textInputLayout.error = "Необходимо указать, кто вам должен"
                     currentData.partnerCorrect = false
                 } else {
-                    textInputEditText1.error = null
+                    textInputLayout.error = null
                     currentData.partnerCorrect = true
                 }
             }
@@ -102,7 +104,7 @@ class AddNewDebtActivity : AppCompatActivity() {
                 if (!currentData.quantityCorrect) {
                     textInputLayout2.error = "Неправильно введена сумма долга"
                 } else {
-                    textInputEditText1.error = null
+                    textInputLayout2.error = null
                 }
             }
 

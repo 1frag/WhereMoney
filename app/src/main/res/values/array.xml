@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="currencies_list">
-        <item>RUS</item>
+        <item>RUB</item>
         <item>USD</item>
         <item>EUR</item>
         <item>NZD</item>
