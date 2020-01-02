@@ -14,10 +14,10 @@ class MyAdapter(val items: ArrayList<Debt>, val context: Context?) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // todo: делать логику отображения
         val current = items.get(position)
-        holder.tvHowMany?.text = String.format("%d (%s)",
+        holder.tvHowMany?.text = String.format("%.2f (%s)",
             current.quantity, current.currency)
-        holder.tvWhen?.text = current.date.toString()
-        holder.tvWho?.text = current.from
+        holder.tvWhen?.text = current.date
+        holder.tvWho?.text = current.partner
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
