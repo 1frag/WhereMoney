@@ -8,12 +8,16 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
-        style="@style/UsuallyCardViewStyle"
+        style="@style/CardViewStyle"
         android:layout_width="match_parent"
-        android:layout_height="218dp"
+        android:layout_height="112dp"
         android:layout_gravity="center"
-        android:layout_margin="20dp"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/usuallyCardColour"
         app:cardCornerRadius="4dp"
+        app:contentPaddingBottom="12dp"
+        app:contentPaddingLeft="16dp"
+        app:contentPaddingTop="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,35 +27,48 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tvHowManyRubOnly"
+                android:layout_width="166dp"
+                android:layout_height="29dp"
+                android:fontFamily="@font/roboto_thin"
+                android:text=""
+                android:textColor="#fff"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvWhen" />
+
+            <TextView
                 android:id="@+id/tvWho"
                 android:layout_width="274dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="13dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/roboto_thin"
                 android:text="@string/loading"
+                android:textColor="#fff"
                 android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvHowMany" />
 
             <TextView
                 android:id="@+id/tvWhen"
                 android:layout_width="274dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="16dp"
+                android:layout_height="20dp"
                 android:fontFamily="@font/roboto_thin"
                 android:text="@string/loading"
+                android:textColor="#fff"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvHowMany"
-                android:layout_width="274dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="16dp"
+                android:layout_width="129dp"
+                android:layout_height="29dp"
                 android:fontFamily="@font/roboto_thin"
                 android:text="@string/loading"
+                android:textColor="#fff"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvWhen" />

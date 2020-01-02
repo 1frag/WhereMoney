@@ -1,7 +1,7 @@
-package com.example.wheremoney.models
+package com.example.wheremoney.helpers
 
 import androidx.room.*
-import java.util.*
+import com.example.wheremoney.models.Debt
 
 
 @Dao
