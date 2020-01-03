@@ -45,6 +45,17 @@ class CurrencyCtl {
         }
     }
 
+    fun isSuccess(): Boolean {
+        if (state != PENDING) return state == SUCCESS
+        try {
+            this.join()
+        } catch (t: Throwable) {
+            Log.e("CurrencyCtl", t.message.toString())
+            return false
+        }
+        return true
+    }
+
     private fun convertToBase(value: Float, currency: String): Float {
         var c = currency
         if (model == null) {

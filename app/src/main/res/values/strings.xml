@@ -23,4 +23,7 @@
     <string name="edit_date_desc">editDate</string>
     <string name="i_must_str">Я должен: %.2f</string>
     <string name="owe_to_me_str">Мне должны: %.2f</string>
+    <string name="yor_re_happy">У вас пока нет долгов.\nСчастливый вы человек!</string>
+    <string name="sorry">Кажется что-то пошло не так,\nзайдите позже</string>
+    <string name="internet_problem">Кажется интернета нет</string>
 </resources>

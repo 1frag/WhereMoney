@@ -5,19 +5,26 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.example.wheremoney.R
 import com.example.wheremoney.controllers.CurrencyCtl
+import com.example.wheremoney.helpers.AppDatabase
 import com.example.wheremoney.helpers.StrongFunctions
 import com.example.wheremoney.models.DateInfo
 import com.example.wheremoney.models.Debt
 import kotlinx.android.synthetic.main.card_item.view.*
+import kotlinx.coroutines.*
 import kotlin.math.absoluteValue
 
 
-class MyAdapter(private val items: ArrayList<Debt>, private val context: Context?) :
+class MyAdapter(
+    private val items: ArrayList<Debt>,
+    private val currencyCtl: CurrencyCtl,
+    private val context: Context?
+) :
     RecyclerView.Adapter<ViewHolder>() {
-    private var currencyCtl: CurrencyCtl = CurrencyCtl()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val current = items[position]
@@ -35,6 +42,7 @@ class MyAdapter(private val items: ArrayList<Debt>, private val context: Context
 
     private fun defineOnlyRub(holder: ViewHolder, debt: Debt) {
         if (debt.currency == "RUB") return
+        if (!currencyCtl.isSuccess()) return
         holder.tvHowManyRubOnly.text = String.format(
             "%.2f %s",
             currencyCtl.convert(debt.quantity.absoluteValue, debt.currency, "RUB"),
@@ -61,6 +69,26 @@ class MyAdapter(private val items: ArrayList<Debt>, private val context: Context
             getDate(), getDirection(),
             DateInfo(debt).toString()
         )
+    }
+
+    fun removeAt(position: Int) = runBlocking {
+        onRemoveAt(position)
+        items.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+    private suspend fun onRemoveAt(position: Int) = withContext(Dispatchers.IO) {
+        launch {
+            val db = Room.databaseBuilder(
+                this@MyAdapter.context!!,
+                AppDatabase::class.java, "hits.db"
+            ).build()
+            try {
+                db.debtDao().delete(items[position])
+            } finally {
+                db.close()
+            }
+        }
     }
 
     private fun generateTextWhen(date: Int, direction: Int, formatDate: String): String {

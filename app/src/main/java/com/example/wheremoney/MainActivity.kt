@@ -46,17 +46,21 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        val tvExchangeRates: TextView = navView.getHeaderView(0)
-            .findViewById(R.id.tvExchangeRates)
-        syncTextExchangeRates(tvExchangeRates)
+        val tvExchangeRates: TextView = navView.getHeaderView(0).findViewById(R.id.tvExchangeRates)
+        val tvIMust: TextView = navView.getHeaderView(0).findViewById(R.id.tvIMust)
+        val tvOweToMe: TextView = navView.getHeaderView(0).findViewById(R.id.tvOweToMe)
+        val tvBudget: TextView = navView.getHeaderView(0).findViewById(R.id.tvBudget)
 
-        val tvIMust: TextView = navView.getHeaderView(0)
-            .findViewById(R.id.tvIMust)
-        val tvOweToMe: TextView = navView.getHeaderView(0)
-            .findViewById(R.id.tvOweToMe)
-        val tvBudget: TextView = navView.getHeaderView(0)
-            .findViewById(R.id.tvBudget)
-        syncTextAboutBudget(tvIMust, tvOweToMe, tvBudget)
+        if (currencyCtl.isSuccess()) {
+            syncTextExchangeRates(tvExchangeRates)
+            syncTextAboutBudget(tvIMust, tvOweToMe, tvBudget)
+        } else {
+            // нет интернета, плохой запрос или, может быть, апокалипсис
+            tvExchangeRates.text = resources.getString(R.string.sorry)
+            tvIMust.text = ""
+            tvOweToMe.text = ""
+            tvBudget.text = ""
+        }
     }
 
     private fun syncTextExchangeRates(tv: TextView) {

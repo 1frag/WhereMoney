@@ -14,6 +14,8 @@ interface DebtDao {
     fun getOweToMe(): List<Debt>
     @Insert
     fun insert(debt: Debt)
+    @Delete
+    fun delete(debt: Debt)
 }
 
 @Database(
