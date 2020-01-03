@@ -2,6 +2,7 @@ package com.example.wheremoney.ui.home
 
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.example.wheremoney.SwipeToDeleteCallback
 import com.example.wheremoney.controllers.CurrencyCtl
 import com.example.wheremoney.helpers.AppDatabase
 import com.example.wheremoney.models.Debt
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.coroutines.*
 
@@ -65,6 +67,14 @@ class HomeFragment : Fragment() {
             rv.layoutManager = LinearLayoutManager(context)
             rv.adapter = MyAdapter(debts, currencyCtl, context)
             debts.addAll(result)
+
+            if (debts.size == 0) {
+                pictureIfNoOneDebt.visibility = View.VISIBLE
+                textIfNoOneDebt.visibility = View.VISIBLE
+            } else {
+                pictureIfNoOneDebt.visibility = View.INVISIBLE
+                textIfNoOneDebt.visibility = View.INVISIBLE
+            }
 
             val swipeHandler = object : SwipeToDeleteCallback(context) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
