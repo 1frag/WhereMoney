@@ -1,15 +1,13 @@
-package com.example.wheremoney.ui.home
+package com.example.wheremoney.controllers
 
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.wheremoney.R
-import com.example.wheremoney.controllers.CurrencyCtl
 import com.example.wheremoney.helpers.AppDatabase
 import com.example.wheremoney.helpers.StrongFunctions
 import com.example.wheremoney.models.DateInfo

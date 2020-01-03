@@ -15,11 +15,11 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.home.AddNewDebtActivity"
+            android:name=".views.AddNewDebtActivity"
             android:label="@string/title_activity_add_new_debt"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".views.MainActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>

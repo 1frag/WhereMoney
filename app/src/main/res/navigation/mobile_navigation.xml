@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/navToday">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.wheremoney.ui.home.HomeFragment"
+        android:id="@+id/navToday"
+        android:name="com.example.wheremoney.views.TodayFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.wheremoney.ui.gallery.GalleryFragment"
+        android:id="@+id/navMyDebts"
+        android:name="com.example.wheremoney.views.MyDebtsFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.wheremoney.ui.slideshow.SlideshowFragment"
+        android:id="@+id/navTheirDebts"
+        android:name="com.example.wheremoney.views.TheirDebtFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 

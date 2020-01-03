@@ -1,4 +1,4 @@
-package com.example.wheremoney.ui.home
+package com.example.wheremoney.views
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -7,12 +7,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
-import com.example.wheremoney.MainActivity
 import com.example.wheremoney.R
 import com.example.wheremoney.helpers.AppDatabase
 import com.example.wheremoney.models.DateInfo
@@ -24,8 +24,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.logging.Logger
-import kotlin.math.log
 
 
 class AddNewDebtActivity : AppCompatActivity() {
@@ -118,18 +116,18 @@ class AddNewDebtActivity : AppCompatActivity() {
                 Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            prepareAndDoInsert()
-            this@AddNewDebtActivity.finish()
+            prepareAndDoInsert { this@AddNewDebtActivity.finish() }
         }
     }
 
-    private fun prepareAndDoInsert() {
+    private fun prepareAndDoInsert(howToGoAway: () -> Unit) {
         // агрегируя данные отправлять в инсёрт
         doInsertDebt(
             textInputEditText1.text.toString(),
             currentData.date,
             currentData.multiplier * textInputEditText2.text.toString().toFloat(),
-            spinner.selectedItem.toString()
+            spinner.selectedItem.toString(),
+            howToGoAway
         )
     }
 
@@ -157,8 +155,7 @@ class AddNewDebtActivity : AppCompatActivity() {
                         Надо исправить данные или ответ*/
                     Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
                 } else {
-                    prepareAndDoInsert()
-                    howToGoAway()
+                    prepareAndDoInsert(howToGoAway)
                 }
             }
             .setNegativeButton("ОТМЕНА") { _: DialogInterface, _: Int ->
@@ -172,7 +169,9 @@ class AddNewDebtActivity : AppCompatActivity() {
         onAnyBackButton(fun() { super.onBackPressed() })
     }
 
-    private fun doInsertDebt(partner: String, date: DateInfo?, quantity: Float, currency: String) {
+    private fun doInsertDebt(partner: String, date: DateInfo?,
+                             quantity: Float, currency: String,
+                             howToGoAway: () -> Unit) {
         lifecycleScope.launch {
             val curDebt = Debt(
                 partner = partner,
@@ -199,6 +198,8 @@ class AddNewDebtActivity : AppCompatActivity() {
 
             }
             res.await()
+            Log.i("AddNewDebtActivity", "addNewDebt")
+            howToGoAway()
         }
     }
 

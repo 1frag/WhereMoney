@@ -4,17 +4,18 @@ import android.util.Log
 import com.example.wheremoney.helpers.ApiService
 import com.example.wheremoney.models.CurrencyResponse
 import com.example.wheremoney.models.SecretStorage
+import com.example.wheremoney.controllers.CurrencyCtl.State.*
 import kotlinx.coroutines.*
 
 class CurrencyCtl {
-    private val PENDING = 0
-    private val FAILED = -1
-    private val SUCCESS = 1
+    enum class State {
+        PENDING, FAILED, SUCCESS
+    }
 
     private var state = PENDING
     private var model: CurrencyResponse? = null
 
-    private suspend fun refresh(): Int {
+    private suspend fun refresh(): State {
         val apiService = ApiService.create()
         val u = apiService.search(SecretStorage().accessKey)
         val data = u.await()
@@ -33,7 +34,7 @@ class CurrencyCtl {
     }
 
     private fun join() {
-        fun inner(): Int = runBlocking {
+        fun inner(): State = runBlocking {
             if (state == PENDING) {
                 state = refresh()
             }
