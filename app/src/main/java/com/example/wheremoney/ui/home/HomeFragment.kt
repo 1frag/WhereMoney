@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.wheremoney.R
+import com.example.wheremoney.controllers.CurrencyCtl
 import com.example.wheremoney.helpers.AppDatabase
 import com.example.wheremoney.models.Debt
 import kotlinx.android.synthetic.main.fragment_home.view.*

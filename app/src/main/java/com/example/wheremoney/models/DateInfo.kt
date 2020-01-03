@@ -2,7 +2,8 @@ package com.example.wheremoney.models
 
 import java.util.*
 
-class DateInfo(var day: Int = 0, var month: Int = 0, var year: Int = 0) {
+class DateInfo(var day: Int = 0, var month: Int = 0, var year: Int = 0,
+               var infinity: Boolean = false) {
 
     private fun earlyThan(other: DateInfo): Boolean {
         if (this.year < other.year) return true
@@ -33,6 +34,10 @@ class DateInfo(var day: Int = 0, var month: Int = 0, var year: Int = 0) {
     }
 
     constructor (debt: Debt) : this() {
+        if (debt.infinityDebt) {
+            infinity = true
+            return
+        }
         this.day = debt.day!!
         this.month = debt.month!!
         this.year = debt.year!!
@@ -43,6 +48,9 @@ class DateInfo(var day: Int = 0, var month: Int = 0, var year: Int = 0) {
     }
 
     override fun toString(): String {
-        return "%d.%d.%d".format(day, month, year)
+        if (infinity) {
+            return "скончания времён"
+        }
+        return "%d.%d.%d".format(day, month + 1, year)
     }
 }

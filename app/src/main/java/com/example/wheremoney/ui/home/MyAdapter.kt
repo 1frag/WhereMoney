@@ -1,6 +1,5 @@
 package com.example.wheremoney.ui.home
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -8,15 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wheremoney.R
+import com.example.wheremoney.controllers.CurrencyCtl
+import com.example.wheremoney.helpers.StrongFunctions
 import com.example.wheremoney.models.DateInfo
 import com.example.wheremoney.models.Debt
 import kotlinx.android.synthetic.main.card_item.view.*
+import kotlin.math.absoluteValue
 
 
 class MyAdapter(private val items: ArrayList<Debt>, private val context: Context?) :
     RecyclerView.Adapter<ViewHolder>() {
+    private var currencyCtl: CurrencyCtl = CurrencyCtl()
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // todo: делать логику отображения
         val current = items[position]
         chooseStyle(holder, current)
         defineWhen(holder, current)
@@ -24,7 +27,8 @@ class MyAdapter(private val items: ArrayList<Debt>, private val context: Context
 
         holder.tvHowMany.text = String.format(
             "%.2f %s",
-            current.quantity, current.currency.likeCurrency()
+            current.quantity.absoluteValue,
+            StrongFunctions().likeCurrency(current.currency)
         )
         holder.tvWho.text = current.partner
     }
@@ -33,25 +37,12 @@ class MyAdapter(private val items: ArrayList<Debt>, private val context: Context
         if (debt.currency == "RUB") return
         holder.tvHowManyRubOnly.text = String.format(
             "%.2f %s",
-            convertCurrency(debt.quantity, debt.currency, "RUB"),
-            "RUB".likeCurrency()
+            currencyCtl.convert(debt.quantity.absoluteValue, debt.currency, "RUB"),
+            StrongFunctions().likeCurrency("RUB")
         )
     }
 
-    private fun convertCurrency(howMany: Float, c1from: String, c2to: String): Float {
-        return 1.0f
-    }
-
     private fun Boolean.toInt() = if (this) 1 else 0
-
-    private fun String.likeCurrency(): String {
-        return when (this) {
-            "RUB" -> "\u20BD"
-            "USD" -> "\$"
-            "EUR" -> "€"
-            else -> this
-        }
-    }
 
     private fun defineWhen(holder: ViewHolder, debt: Debt) {
         fun getDate(): Int {

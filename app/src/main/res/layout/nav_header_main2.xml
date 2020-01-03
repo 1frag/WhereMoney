@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/clNavHeader"
     android:layout_height="@dimen/nav_header_height"
     android:background="#154E79"
     android:gravity="bottom"
@@ -14,43 +15,43 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tvIMust"
         android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_marginStart="13dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto_thin"
-        android:text="@string/budjet"
+        android:text="@string/i_must_str"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvOweToMe"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tvOweToMe"
         android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_marginStart="13dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto_thin"
-        android:text="@string/budjet"
+        android:text="@string/owe_to_me_str"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvBudget"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvBudget"
         android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_marginStart="13dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto_thin"
-        android:text="@string/budjet"
+        android:text="@string/budget"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="parent" />
@@ -67,7 +68,7 @@
         app:srcCompat="@drawable/header_of_drav_menu" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvExchangeRates"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
@@ -75,10 +76,10 @@
         android:layout_marginBottom="10dp"
         android:height="70dp"
         android:fontFamily="@font/roboto_thin"
-        android:text="@string/curs_valut"
+        android:text="@string/exchange_rates"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvIMust"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
