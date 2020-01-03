@@ -41,11 +41,9 @@ class HomeFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         root.fab.setOnClickListener {
             addNewDebt()
+            selectAllAgain(this.context!!, root.rv_cards_list)
         }
         selectAllAgain(this.context!!, root.rv_cards_list)
-        if (!currencyCtl.isSuccess()) {
-            Toast.makeText(this.context!!, R.string.internet_problem, Toast.LENGTH_LONG).show()
-        }
         return root
     }
 
@@ -80,10 +78,14 @@ class HomeFragment : Fragment() {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val adapter = rv.adapter as MyAdapter
                     adapter.removeAt(viewHolder.adapterPosition)
+                    selectAllAgain(context, rv_cards_list)
                 }
             }
             val itemTouchHelper = ItemTouchHelper(swipeHandler)
             itemTouchHelper.attachToRecyclerView(rv)
+            if (!currencyCtl.isSuccess()) {
+                Toast.makeText(context, R.string.internet_problem, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
